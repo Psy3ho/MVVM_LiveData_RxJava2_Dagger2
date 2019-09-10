@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:onClick="@{() -> callback.onClick(project)}">
 
         <TextView
             android:id="@+id/name"

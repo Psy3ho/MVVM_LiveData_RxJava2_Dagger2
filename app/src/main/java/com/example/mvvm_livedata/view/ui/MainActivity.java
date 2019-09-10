@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.example.mvvm_livedata.R;
+import com.example.mvvm_livedata.model.Project;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void showProjectDetails(){
-        projectFragment = new ProjectFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, projectFragment).commit();
+    public void showProjectDetails(Project project){
+        projectFragment = new ProjectFragment().forProject(project.name);
+        getSupportFragmentManager().beginTransaction().addToBackStack("project").replace(R.id.fragment_container, projectFragment,null).commit();
     }
 }

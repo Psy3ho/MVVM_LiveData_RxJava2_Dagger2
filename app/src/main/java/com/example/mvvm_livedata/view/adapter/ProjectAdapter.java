@@ -1,17 +1,17 @@
 package com.example.mvvm_livedata.view.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mvvm_livedata.R;
-import com.example.mvvm_livedata.databinding.FragmentItemListBinding;
 import com.example.mvvm_livedata.databinding.ProjectItemBinding;
 import com.example.mvvm_livedata.model.Project;
+import com.example.mvvm_livedata.view.callback.ProjectClickCallback;
 import com.example.mvvm_livedata.viewmodel.ProjectListViewModel;
 
 import java.util.List;
@@ -22,9 +22,13 @@ public class ProjectAdapter extends
     private List<Project> projects;
     private ProjectListViewModel projectListViewModel;
 
-    public ProjectAdapter(List<Project> projects, ProjectListViewModel projectListViewModel) {
+    @Nullable
+    private final ProjectClickCallback projectClickCallback;
+
+    public ProjectAdapter(List<Project> projects, ProjectListViewModel projectListViewModel, @Nullable ProjectClickCallback projectClickCallback) {
         this.projects = projects;
         this.projectListViewModel = projectListViewModel;
+        this.projectClickCallback = projectClickCallback;
     }
 
 
@@ -34,13 +38,15 @@ public class ProjectAdapter extends
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ProjectItemBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.project_item,parent, false);
+
+        binding.setCallback(projectClickCallback);
         return  new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Project project = projects.get(position);
-        holder.setBinding(project, projectListViewModel);
+        holder.binding.setProject(projects.get(position));
+        holder.binding.executePendingBindings();
 
     }
 

@@ -61,7 +61,7 @@ public class ProjectRepository {
         return data;
     }
 
-    public LiveData<Project> getProjectDetails(String userID, String projectName) {
+    public MutableLiveData<Project> getProjectDetails(String userID, String projectName) {
 
         final MutableLiveData<Project> data = new MutableLiveData<>();
 
