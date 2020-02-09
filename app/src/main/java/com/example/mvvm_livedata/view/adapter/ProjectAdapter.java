@@ -16,7 +16,15 @@ import com.example.mvvm_livedata.viewmodel.ProjectListViewModel;
 
 import java.util.List;
 
-
+/**
+ * Adapter class
+ *
+ * This class contains standard methods for filling adapter with data
+ *
+ * @author Eugen Benčat
+ * @version 1.0
+ * @date 2019-2020
+ */
 public class ProjectAdapter extends
         RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private List<Project> projects;

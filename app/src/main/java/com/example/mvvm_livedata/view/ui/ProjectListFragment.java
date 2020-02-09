@@ -29,12 +29,26 @@ import com.example.mvvm_livedata.view.callback.ObserveCallback;
 import com.example.mvvm_livedata.view.callback.ProjectClickCallback;
 import com.example.mvvm_livedata.viewmodel.ProjectListViewModel;
 
+/**
+ * fragment for loading layout resources
+ *
+ * This activity is used to display layout resources.
+ * Mainly to display users project list in adapter
+ *
+ * @author Eugen Benčat
+ * @version 1.0
+ * @date 2019-2020
+ */
 public class ProjectListFragment extends Fragment implements ObserveCallback {
     private FragmentItemListBinding binding;
     private ProjectAdapter projectAdapter;
     private ProjectListViewModel projectListViewModel;
     private PendingIntent pendingIntent;
     private AlarmManager alarmManager;
+    /**
+     * public static final value
+     * value for new Broadcast with intent
+     */
     public static final String mMyBroadcastReceiver = "com.example.broadcast.MY_BROADCAST";
     private IntentFilter intentFilter;
     IntentFilter intentFilter1;
@@ -92,6 +106,11 @@ public class ProjectListFragment extends Fragment implements ObserveCallback {
     }
 
 
+    /**
+     * Method that set AlarmManager to observe changes in project details in intervals
+     *
+     * @param time specified interval
+     */
     private void setAlarmManager(long time) {
         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 
@@ -113,6 +132,11 @@ public class ProjectListFragment extends Fragment implements ObserveCallback {
         Toast.makeText(getContext(), "Reloading data", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * private class
+     * BrodcastReceiver class with constructor
+     * contain override method onReceive for observe data in projects
+     */
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -120,6 +144,10 @@ public class ProjectListFragment extends Fragment implements ObserveCallback {
         }
     };
 
+    /**
+     * private final interface
+     * contain override method onClick
+     */
     private final ProjectClickCallback projectClickCallback = new ProjectClickCallback() {
         @Override
         public void onClick(Project project) {

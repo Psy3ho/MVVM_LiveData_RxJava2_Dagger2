@@ -20,9 +20,23 @@ import com.example.mvvm_livedata.R;
 import com.example.mvvm_livedata.databinding.ProjectFragmentBinding;
 import com.example.mvvm_livedata.model.Project;
 import com.example.mvvm_livedata.viewmodel.ProjectViewModel;
-
+/**
+ * fragment for loading layout resources
+ *
+ * This activity is used to display layout resources.
+ * Mainly to display project details
+ *
+ * @author Eugen Benčat
+ * @version 1.0
+ * @date 2019-2020
+ */
 public class ProjectFragment extends Fragment {
 
+
+    /**
+     * a private static final value
+     * a Project identification number
+     */
     private static final String KEY_PROJECT_ID = "project_id";
     private ProjectFragmentBinding binding;
 
@@ -48,6 +62,11 @@ public class ProjectFragment extends Fragment {
 
     }
 
+    /**
+     * Method that observe changes in the project shown
+     *
+     * @param viewModel project viewmodel
+     */
     private void observeModel(final ProjectViewModel viewModel) {
         viewModel.getProjectLiveData().observe(this, new Observer<Project>() {
             @Override
@@ -57,6 +76,11 @@ public class ProjectFragment extends Fragment {
         });
     }
 
+    /**
+     * Constructor Project fragment
+     *
+     * @param projectID project identifacation number
+     */
     public static ProjectFragment forProject(String projectID) {
 
         ProjectFragment fragment = new ProjectFragment();

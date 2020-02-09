@@ -16,10 +16,35 @@ import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Project Repository
+ *
+ * Class designed as a repository for calling the GitHub API for a user or project
+ *
+ * @author Eugen Benčat
+ * @version 1.0
+ * @date 2019-2020
+ */
 public class ProjectRepository {
+
+    /**
+     * a private value
+     * interface value for GitHub connection
+     */
     private GitHubConnection gitHubConnection;
+
+    /**
+     * a private value
+     * project repository
+     */
     private static ProjectRepository projectRepository;
 
+
+    /**
+     * Constructor without parameters
+     *
+     * Used technology for build connection - Retrofit
+     */
     public ProjectRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(gitHubConnection.HTTP_API_GITHUB_URL)
@@ -39,7 +64,12 @@ public class ProjectRepository {
 
 
 
-
+    /**
+     * Method that displays the user selected project on the next fragment
+     *
+     * @param userId that was selected by the user
+     * @return Mutable list of projects
+     */
     public MutableLiveData<List<Project>> getProjectList(String userId) {
         final MutableLiveData<List<Project>> data = new MutableLiveData<>();
 
@@ -61,6 +91,13 @@ public class ProjectRepository {
         return data;
     }
 
+    /**
+     * Method that displays the user selected project on the next fragment
+     *
+     * @param userID user identification number
+     * @param projectName name of the project
+     * @return mutable data about project
+     */
     public MutableLiveData<Project> getProjectDetails(String userID, String projectName) {
 
         final MutableLiveData<Project> data = new MutableLiveData<>();
